@@ -25,6 +25,97 @@
 	<!-- Custom styles for this template -->
 	<link href="~/css/clean-blog.min.css" rel="stylesheet">
 
+
+	<!-- Main Quill library -->
+	<script src="//cdn.quilljs.com/1.3.6/quill.js"></script>
+	<script src="//cdn.quilljs.com/1.3.6/quill.min.js"></script>
+
+	<!-- Theme included stylesheets -->
+	<link href="//cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet">
+	<link href="//cdn.quilljs.com/1.3.6/quill.bubble.css" rel="stylesheet">
+
+	<style>
+		.blog-comment::before,
+		.blog-comment::after,
+		.blog-comment-form::before,
+		.blog-comment-form::after {
+			content: "";
+			display: table;
+			clear: both;
+		}
+
+		.blog-comment {
+			padding-left: 15%;
+			padding-right: 15%;
+		}
+
+			.blog-comment ul {
+				list-style-type: none;
+				padding: 0;
+			}
+
+			.blog-comment img {
+				opacity: 1;
+				filter: Alpha(opacity=100);
+				-webkit-border-radius: 4px;
+				-moz-border-radius: 4px;
+				-o-border-radius: 4px;
+				border-radius: 4px;
+			}
+
+				.blog-comment img.avatar {
+					position: relative;
+					float: left;
+					margin-left: 0;
+					margin-top: 0;
+					width: 65px;
+					height: 65px;
+				}
+
+			.blog-comment .post-comments {
+				border: 1px solid #eee;
+				margin-bottom: 20px;
+				margin-left: 85px;
+				margin-right: 0px;
+				padding: 10px 20px;
+				position: relative;
+				-webkit-border-radius: 4px;
+				-moz-border-radius: 4px;
+				-o-border-radius: 4px;
+				border-radius: 4px;
+				background: #fff;
+				color: #6b6e80;
+				position: relative;
+			}
+
+			.blog-comment .meta {
+				font-size: 13px;
+				color: #aaaaaa;
+				padding-bottom: 8px;
+				margin-bottom: 10px !important;
+				border-bottom: 1px solid #eee;
+			}
+
+			.blog-comment ul.comments ul {
+				list-style-type: none;
+				padding: 0;
+				margin-left: 85px;
+			}
+
+		.blog-comment-form {
+			padding-left: 15%;
+			padding-right: 15%;
+			padding-top: 40px;
+		}
+
+			.blog-comment h3,
+			.blog-comment-form h3 {
+				margin-bottom: 40px;
+				font-size: 26px;
+				line-height: 30px;
+				font-weight: 800;
+			}
+	</style>
 </head>
 
 <body>
@@ -117,10 +208,70 @@
 						<a href="http://spaceipsum.com/">Space Ipsum</a>. Photographs by
 						<a href="https://www.flickr.com/photos/nasacommons/">NASA on The Commons</a>.
 					</p>
+					<hr>
+
+					<div class="row">
+						<h3 class="text-info col-md-8">Comments</h3>
+						<button type="button" class="btn btn-primary col-md-4">Submit</button>
+					</div>
+
+					<div class="col-md-12">
+						<div id="editor-container" style="height: 350px;">
+						</div>
+					</div>
+
+
 				</div>
 			</div>
 		</div>
 	</article>
+
+	<div class="container bootstrap snippet">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="blog-comment">
+					<hr />
+					<ul class="comments">
+						<li class="clearfix">
+							<img src="https://bootdey.com/img/Content/user_1.jpg" class="avatar" alt="">
+							<div class="post-comments">
+								<p class="meta">Dec 18, 2014 <a href="#">JohnDoe</a> says : <i class="pull-right"><a href="#"><small>Reply</small></a></i></p>
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+									Etiam a sapien odio, sit amet
+								</p>
+							</div>
+						</li>
+						<li class="clearfix">
+							<img src="https://banner2.kisspng.com/20180512/dew/kisspng-xml-external-entity-attack-code-injection-cross-si-5af6c4265c62b1.0457972215261215103784.jpg" class="avatar" alt="">
+							<div class="post-comments">
+								<p class="meta">Dec 19, 2014 <a href="#">EvilMe</a> says : <i class="pull-right"><a href="#"><small>Reply</small></a></i></p>
+								<p>
+									this is a wonderful article
+								</p>
+							</div>
+
+							<ul class="comment">
+								<li class="clearfix">
+									<img src="https://bootdey.com/img/Content/user_3.jpg" class="avatar" alt="">
+									<div class="post-comments">
+										<p class="meta">Dec 20, 2014 <a href="#">Sakura</a> says : <i class="pull-right"><a href="#"><small>Reply</small></a></i></p>
+										<p>
+											Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+											Etiam a sapien odio, sit amet
+										</p>
+									</div>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+	</div>
+
+
 
 	<hr>
 	<!-- Footer -->
@@ -166,6 +317,22 @@
 
 	<!-- Custom scripts for this template -->
 	<script src="~/js/clean-blog.min.js"></script>
+
+	<script>
+		$(function () {
+			var quill = new Quill('#editor-container', {
+				modules: {
+					toolbar: [
+						[{ header: [1, 2, false] }],
+						['bold', 'italic', 'underline'],
+						['image', 'code-block']
+					]
+				},
+				placeholder: 'Comment the article..',
+				theme: 'snow'  // or 'bubble'
+			});
+		});
+	</script>
 
 </body>
 

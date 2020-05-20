@@ -7,11 +7,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EvilApp.Controllers
 {
-	public class Input
-	{
-		public string Data { get; set; }
-	}
-
 	[Route("api/[controller]")]
 	[ApiController]
 	public class DataController : ControllerBase
